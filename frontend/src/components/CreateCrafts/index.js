@@ -4,13 +4,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { setCrafts } from "../Redux/reducers/crafts";
 import Dropdown from "react-bootstrap/Dropdown";
-
+import './style.css'
+import { useNavigate } from "react-router-dom";
 const CreateCraft = () => {
   const [craft, setCraft] = useState({});
-
+  const [value,setValue] = useState("Select your maintenance");
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
   const state = useSelector((state) => {
+    // console.log(state.auth.userInfo);
     return {
       userId: state.auth.userId,
       token: state.auth.token,
@@ -18,7 +21,7 @@ const CreateCraft = () => {
       userInfo: state.auth.userInfo,
     };
   });
-  console.log(state.userInfo);
+  // console.log(state.userInfo);
   useEffect(() => {
     axios
       .get("http://localhost:5000/crafts/")
@@ -43,7 +46,8 @@ const CreateCraft = () => {
         }
       )
       .then((result) => {
-        console.log(result);
+        // console.log(result);
+        navigate('/Dashboard/provider')
       })
       .catch((err) => {
         console.log(err);
@@ -51,18 +55,21 @@ const CreateCraft = () => {
   };
 
   return (
-    <div className="create-post-container">
+    <div className="create-craft-container">
       {/* <p>i am a CreateCrafte componnent</p> */}
-      <p>please Select your maintenance from list</p>
+      <p>Hello Mr : {state.userInfo.first_name}</p>
+      <p>This is your phone number that customers will contact you through : {state.userInfo.Phone_Number}</p>
+      <p>Please Select your maintenance from list : </p>
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Select your maintenance
+        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+          {value}
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {state.crafts.map((craft, id) => {
             return (
-              <Dropdown.Item
+              <Dropdown.Item 
                 onClick={() => {
+                  setValue(craft.name)
                   setCraft(craft);
                 }}
                 key={id}
@@ -72,10 +79,11 @@ const CreateCraft = () => {
             );
           })}
         </Dropdown.Menu>
+        {value!="Select your maintenance"&&<p style={{marginTop:"3%"}}>Please click Confirm to confirm the profession</p>}
+      
+
       </Dropdown>
-      <p>{state.userInfo.first_name}</p>
-      <p>{state.userInfo.Phone_number}</p>
-      <button onClick={submitFn}>Submit</button>
+      <button onClick={submitFn} className="Submit-btn" >Submit</button>
     </div>
   );
 };

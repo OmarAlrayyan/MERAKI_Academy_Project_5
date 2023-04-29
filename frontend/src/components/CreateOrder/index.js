@@ -16,6 +16,18 @@ const CreateOrder = () =>{
     const [schedule_date, setSchedule_date] = useState("")
     const [order_desc, setOrder_desc] = useState("")
     const [postInfo, setPostInfo] = useState({})
+    const sendSmsNotifaction = () =>{
+        axios
+      .post("http://localhost:5000/orders/sms", {
+        schedule_date
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
     const getPostById = ()=>{
         // console.log(location);
         axios
@@ -41,6 +53,7 @@ const CreateOrder = () =>{
                 result.data.order[0].id,
                 result.data.order[0].order_desc,
                 result.data.order[0].schedule_date)
+            sendSmsNotifaction()
         })
         .catch((err)=>{
             console.log(err);

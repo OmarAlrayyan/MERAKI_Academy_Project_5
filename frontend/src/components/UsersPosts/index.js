@@ -2,12 +2,13 @@ import axios from "axios";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { setPost, deletePost, updatePost } from "../Redux/reducers/posts";
+import { setMyPost, deletePost, updatePost } from "../Redux/reducers/posts";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import Form from 'react-bootstrap/Form';
-const UserPost = () => {
+import "./index.css"
+const UserPosts = () => {
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("")
@@ -18,7 +19,7 @@ const UserPost = () => {
   const state = useSelector((state) => {
     return {
       token: state.auth.token,
-      posts: state.post.posts,
+      posts: state.post.myPosts,
       userId: state.auth.userId,
     };
   });
@@ -27,13 +28,13 @@ const UserPost = () => {
 
   const getUserPosts = () => {
     axios
-      .get(`http://localhost:5000/posts/${state.userId}`, {
+      .get(`http://localhost:5000/posts/user/myposts`, {
         headers: {
           Authorization: `Bearer ${state.token}`,
         },
       })
       .then((res) => {
-        dispatch(setPost(res.data.posts));
+        dispatch(setMyPost(res.data.posts));
       })
       .catch((err) => {
         console.log(err);
@@ -41,6 +42,7 @@ const UserPost = () => {
   };
 
   const deleteSelectedPost = (id) => {
+    
     axios
       .delete(`http://localhost:5000/posts/${id}`, {
         headers: {
@@ -49,6 +51,7 @@ const UserPost = () => {
       })
       .then((res) => {
         if (res.data.success === true) {
+          console.log(res);
           dispatch(deletePost(id));
         }
       })
@@ -65,7 +68,8 @@ const UserPost = () => {
         },
       })
       .then((res) => {
-        if (res.data.success === true) {
+    console.log(res.data);
+    if (res.data.success === true) {
           dispatch(updatePost(res.data));
         }
       })
@@ -82,10 +86,10 @@ const UserPost = () => {
     <div className="cards">
       {state.posts.map((post, i) => {
         return (
-          <>
+          <div key={i}>
             
             <Card
-              className="post"
+              className="post cards1"
               style={{ width: "200", height: "150" }}
               key={i}
             >
@@ -95,7 +99,7 @@ const UserPost = () => {
               />
               <Card.Body>
                 <Card.Title>{post.title}</Card.Title>
-                <Button
+                <Button className="mb-2"
                   onClick={(e) => {
                     deleteSelectedPost(post.id);
                   }}
@@ -146,11 +150,11 @@ const UserPost = () => {
                 </Button>
               </Modal.Footer>
             </Modal>
-          </>
+          </div>
         );
       })}
     </div>
   );
 };
 
-export default UserPost;
+export default UserPosts;

@@ -14,11 +14,18 @@
   font-weight: bold;
 }
 .each-navbar:hover{
-  background-color: rgb(241, 241, 241)
+  background-color: rgb(208, 210, 251)
 }
 .for-the-dot {
   font-size: 30px;
   display: block;
   font-weight: 800;
   color: #3872bd;
+}
+.about-us{
+  width: 150px;
+  margin-left: -4%;
+}
+.header-logo:hover{
+  cursor: pointer;
 }

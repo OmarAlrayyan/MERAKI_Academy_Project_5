@@ -94,7 +94,7 @@ function Register() {
         setIsLoading(false);
       tologin();
       }, 3000);
-      return () => clearTimeout(timeout);
+      return () => clearTimeout();
     } catch (err) {
       console.log(err);
       setIsLoading(true);
@@ -104,7 +104,7 @@ function Register() {
       }, 3000);
 
       setDone(false);
-      return () => clearTimeout(timeout);
+      return () => clearTimeout();
     }
   };
   const tologin = () => {

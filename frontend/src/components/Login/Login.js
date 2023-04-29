@@ -50,7 +50,7 @@ const Login = () => {
           navigate("/");
         }, 3000); 
       
-        return () => clearTimeout(timeout);
+        return () => clearTimeout();
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +60,7 @@ const Login = () => {
           setDone(false);
         }, 3000); 
       
-        return () => clearTimeout(timeout);
+        return () => clearTimeout();
       
       });
   };
@@ -148,7 +148,8 @@ const Login = () => {
 
                     dispatch(setLoginGoogel(credentialResponse));
                     dispatch(setUserInfoGoogle(credentialResponse));
-                    toHome()
+                    // toHome()
+                    navigate('/')
                   }}
                   onError={() => {
                     console.log("Login Failed");

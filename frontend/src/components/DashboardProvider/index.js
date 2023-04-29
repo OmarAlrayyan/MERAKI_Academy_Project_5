@@ -14,7 +14,6 @@ const DashboardProvider = () => {
   const [coulmValue,setCoulmValue] = useState([])
   const navigate = useNavigate();
   const state = useSelector((state) => {
-    console.log(state.auth);
     return {
       userId: state.auth.userId,
       token: state.auth.token,
@@ -113,7 +112,6 @@ const DashboardProvider = () => {
     }
   } 
   const getAllOrder = () =>{
-    console.log(state.userId);
     axios
     .get(`http://localhost:5000/orders/${state.userId}`, {headers: {Authorization: state.token}})
     .then((result)=>{
@@ -165,10 +163,10 @@ const toOrder = ()=>{
       <div className="menu">
         
         <p>
-          <button className="go_to"><BsFillHouseGearFill/> Settings</button>
+          <button className="go_to" onClick={()=>{navigate("/update/profile")}}><BsFillHouseGearFill/> Account</button>
         </p><br/>
         <p>
-          <button className="go_to"><BsFilePost/> My Posts</button>
+          <button className="go_to" onClick={()=>{navigate("/user/mypost")}}><BsFilePost/> My Posts</button>
         </p><br/>
         <p>
           <button className="go_to" onClick={toOrder}><BsBorderWidth/> Orders</button>

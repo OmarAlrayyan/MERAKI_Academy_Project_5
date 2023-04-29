@@ -74,17 +74,7 @@ const CreatePost = () => {
 
   return (
     <div className="inpust-post">
-      <Form>
-        <Form.Group
-          className="mb-3"
-          controlId="exampleForm.ControlInput1"
-        ></Form.Group>
-
-        <Form.Group
-          className="mb-3"
-          controlId="exampleForm.ControlTextarea1"
-        ></Form.Group>
-      </Form>
+      
       <MDBContainer fluid>
         <MDBCard
           className={
@@ -173,8 +163,11 @@ const CreatePost = () => {
                     }}
                   />
                 </div>
-                <div
-                  className="d-flex flex-row align-items-center mb-4"
+                
+                {image ? (
+                  <img src={url} className="img" />
+                ) : (
+                 <div className="d-flex flex-row align-items-center mb-4"
                   onDragOver={(e) => {
                     e.preventDefault();
                   }}
@@ -207,7 +200,15 @@ const CreatePost = () => {
                     }}
                   />
                 </div>
+                )}
                 ============================
+                <div>
+                  
+                  <MDBBtn className={
+                      mood === "darkMood"
+                        ? "darkMood mb-4"
+                        : "lightMood mb-4"
+                    }size="lg" onClick={()=>{setImage(null)}}>undo</MDBBtn>
                 <MDBBtn className={
                       mood === "darkMood"
                         ? "darkMood mb-4"
@@ -215,6 +216,7 @@ const CreatePost = () => {
                     }size="lg" onClick={submitFn}>
                   Submit
                 </MDBBtn>
+                </div>
               </MDBCol>
             </MDBRow>
           </MDBCardBody>

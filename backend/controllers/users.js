@@ -59,6 +59,8 @@ const register = async (req, res) => {
                 Phone_Number: result.rows[0].phone_no,
                 role: result.rows[0].role_id,
                 first_name: result.rows[0].first_name,
+                last_name : result.rows[0].last_name,
+                craft_id : result.rows[0].craft_id,
               };
               const options = { expiresIn: "1d" };
               const secret = process.env.SECRET;

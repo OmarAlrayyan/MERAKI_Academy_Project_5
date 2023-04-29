@@ -13,8 +13,11 @@ import {
 } from "mdb-react-ui-kit";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Spinner from "../Spinner/Spinner";
 
 const UpdateUser = () => {
+  const navigate = useNavigate();
   const fileInputRef = useRef();
   const [first_name, setFirst_name] = useState("");
   const [last_name, setLast_name] = useState("");
@@ -122,7 +125,7 @@ useEffect(() => {
     }
   };
   const tologin = () => {
-    navigate("/login");
+    // navigate("/login");
   };
   return (
     <div>

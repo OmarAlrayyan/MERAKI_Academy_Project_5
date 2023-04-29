@@ -2,8 +2,11 @@ import {
   MDBIcon,
  } from "mdb-react-ui-kit";
 import "./footer.css"
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
     return (
       <>
       
@@ -18,20 +21,20 @@ const Footer = () => {
       <p>
       We provide comprehensive solutions to keep your equipment and facilities in top condition. Our experienced team of professionals offers a range of services, including preventative maintenance, repairs, and upgrades to ensure your equipment operates efficiently and safely.</p>
       <div className="social-links d-flex mt-4">
-        <a href="#" className="icons"><i className="bi bi-twitter"><MDBIcon fab icon="twitter" /></i></a>
-        <a href="#" className="icons"><i className="bi bi-facebook"><MDBIcon fab icon="facebook" /></i></a>
-        <a href="#" className="icons"><i className="bi bi-instagram"><MDBIcon fab icon="instagram" /></i></a>
-        <a href="#" className="icons"><i className="bi bi-linkedin"><MDBIcon fab icon="linkedin-in" /></i></a>
+        <a  className="icons"><i className="bi bi-twitter"><MDBIcon fab icon="twitter" /></i></a>
+        <a  className="icons"><i className="bi bi-facebook"><MDBIcon fab icon="facebook" /></i></a>
+        <a  className="icons"><i className="bi bi-instagram"><MDBIcon fab icon="instagram" /></i></a>
+        <a  className="icons"><i className="bi bi-linkedin"><MDBIcon fab icon="linkedin-in" /></i></a>
       </div>
     </div>
 
     <div className="col-lg-2 col-3 footer-links">
       <h4 className="Footerlinks">Links</h4>
       <ul >
-        <li ><a  href="#">Home</a></li>
-        <li><a href="#">About us</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Terms of service</a></li>
+        <li><a onClick={()=>{navigate(`/`)}}>Home</a></li>
+        <li><a onClick={()=>{navigate(`/aboutus`)}}>About us</a></li>
+        <li><a onClick={()=>{navigate(`/support`)}}>support</a></li>
+        <li><a onClick={()=>{navigate(`/Chat`)}}>Chat AI</a></li>
       
       </ul>
     </div>

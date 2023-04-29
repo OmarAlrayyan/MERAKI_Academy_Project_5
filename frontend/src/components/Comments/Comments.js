@@ -23,6 +23,7 @@ const Comments = () => {
       userInfo: state.auth.userInfo,
       userId: state.auth.userId,
       mood: state.Mood.mood,
+      user_image: state.auth.user_image,
     };
   });
   const [comments, setComments] = useState([]);
@@ -31,6 +32,7 @@ const Comments = () => {
   const token = state.token;
   const userId = state.userId;
   const mood = state.mood;
+  const user_image=state.user_image
   const getComment = (id) => {
     axios
       .get(`http://localhost:5000/comments/${id}`, {
@@ -114,7 +116,7 @@ const Comments = () => {
       });
   };
   useEffect(() => {
-    getComment(3);
+    getComment(5);
   }, []);
 
   return (
@@ -139,7 +141,7 @@ const Comments = () => {
                   <Button
                     size="sm"
                     onClick={() => {
-                      CreateComment(3);
+                      CreateComment(5);
                     }}
                   >
                     <IosShareOutlinedIcon />{" "}
@@ -162,7 +164,7 @@ const Comments = () => {
                             <div className="d-flex justify-content-between">
                               <div className="d-flex flex-row align-items-center">
                                 <MDBCardImage
-                                  src="8c3925ac-3e1b-49ce-ac4c-1b9545a5d945.png"
+                                  src={user_image}
                                   alt="avatar"
                                   width="25"
                                   height="25"

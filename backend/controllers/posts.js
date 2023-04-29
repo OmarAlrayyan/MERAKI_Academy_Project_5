@@ -25,7 +25,7 @@ const createNewPost = (req,res) => {
     })
 }
 const getPostsByuser = (req,res) => {
-    const user_id = req.params.user_id
+    const user_id = req.token.userId
     pool
     .query(`SELECT * FROM posts WHERE user_id = ${user_id}`)
     .then((result)=>{
